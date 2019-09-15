@@ -1,0 +1,207 @@
+﻿@model IEnumerable<sabooedu.Areas.Auth.Models.AllLesson>
+@using sabooedu.Areas.Auth.Models
+@using sabooedu.Models
+@{
+    ViewBag.Title = "ChapterDetails";
+    Layout = "~/Views/Shared/main.cshtml";
+    dbcontext db = new dbcontext();
+}
+<style>
+    .video-play.vid-zone {
+       background: transparent;
+    border-radius: 100%;
+    display: inline;
+    font-size: 16px;
+    height: 60px;
+    line-height: 20px;
+    text-align: center;
+    width: 60px;
+    overflow: hidden;
+    position: relative;
+    top: 50%;
+    z-index: 999;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    transition: 0.4s;
+    margin-top: -35px;
+}
+</style>
+
+@section meta
+{
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+}
+<div class="page-area">
+    <div class="breadcumb-overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="breadcrumb text-center">
+                    <div class="section-headline white-headline text-center">
+                        <h3></h3>
+
+                    </div>
+                    <ul>
+                        <li class="home-bread">Coaching</li>
+                        <li></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="single-services-page area-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-sm-4 col-xs-12">
+                <div class="page-head-left">
+                    <!-- strat single area -->
+                    <div class="single-page-head">
+                        <div class="project-history">
+                            <div class="project-name">
+                                <ul>
+                                    <li><span>Project</span>: Industry</li>
+                                    <li><span>Categories</span> : Chemical</li>
+                                    <li><span>Start Date</span> : 4-07-2016</li>
+                                    <li><span>Status</span> : Complete</li>
+                                    <li><span>Architect</span> : Arther</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+               
+                    <!-- strat single area -->
+                    <div class="single-page-head">
+                        <div class="support-text">
+                            <h4>Online Support</h4>
+                            <a><i class="icon icon-phone"></i>+1313-5454652</a>
+                            <p>24 hours online support our customer.replacing a multi-lined selection of text.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End left sidebar -->
+            <!-- Start service page -->
+            <div class="col-md-8 col-sm-8 col-xs-12">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="faq-full">
+                            <div class="faq-details">
+                                <div class="panel-group" id="accordion">
+                                    @foreach (var item in Model)
+                                    {
+                                        if (item.Chid == 1)
+                                        {
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading">
+                                                    <h4 class="check-title">
+                                                        <a data-toggle="collapse" class="active" data-parent="#accordion" href="#@item.Chid">
+                                                            <span class="acc-icons"></span>@item.Name.
+                                                        </a>
+                                                    </h4>
+                                                </div>
+                                                <div id="@item.Chid" class="panel-collapse collapse in">
+                                                    <div class="panel-body">
+                                                        @{
+                                                            IEnumerable<AllModule> am = db.AllModules.Where(x => x.Cid == item.Cid).ToList();
+                                                        }
+                                                        <table class="table table-striped table-hover table-fw-widget" id="table3">
+                                                            <thead>
+                                                                <tr>
+
+                                                                    <th>
+                                                                        Name
+                                                                    </th>
+
+                                                                    <th>
+                                                                        Video
+                                                                    </th>
+                                                                    <th>
+                                                                        Download
+                                                                    </th>
+
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                @foreach (var items in am)
+                                                                {
+                                                                    <tr>
+
+                                                                        <td>
+                                                                            @Html.DisplayFor(modelItem => items.Name)
+                                                                        </td>
+
+                                                                        <td>
+                                                                            @if (items.Type == "Free")
+                                                                            {
+                                                                                <a href="@items.Video" class="video-play vid-zone">
+                                                                                    Preview
+                                                                                </a>
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                <a href="#">
+                                                                                    Lock
+                                                                                </a>
+                                                                            }
+
+
+                                                                        </td>
+                                                                        <td>
+                                                                            @if (items.Type == "Free")
+                                                                            {
+                                                                                <a href="~/Uploadimage/@items.File" class="badge badge-success">Download</a>
+
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                <a href="#" class="badge badge-danger">Lock</a>
+                                                                            }
+                                                                        </td>
+
+                                                                    </tr>
+                                                                }
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                                            }
+                                                            else
+                                                            {
+                                                                <div class="panel panel-default">
+                                                                    <div class="panel-heading">
+                                                                        <h4 class="check-title">
+                                                                            <a data-toggle="collapse" data-parent="#accordion" href="#check-@item.Chid">
+                                                                                <span class="acc-icons"></span> @item.Name
+                                                                            </a>
+                                                                        </h4>
+                                                                    </div>
+                                                                    <div id="#check-@item.Chid" class="panel-collapse collapse">
+                                                                        <div class="panel-body">
+                                                                            <p>
+                                                                                When replacing a multi-lined selection of text, the generated dummy text maintains the amount of lines. When replacing a selection of text within a single line, the amount of words is roughly being maintained.
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                }
+
+                                                            }
+
+                                </div>
+                            </div>
+                            <!-- End FAQ -->
+                        </div>
+                    </div>
+                    <!-- strat single page -->
+                    <!-- single-well end-->
+
+                </div>
+                <!-- end Row -->
+            </div>
+        </div>
+    </div>
+</div>

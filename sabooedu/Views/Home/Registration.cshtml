@@ -1,0 +1,185 @@
+﻿@model sabooedu.Models.Registration
+@{
+    ViewBag.Title = "Registration";
+    Layout = "~/Views/Shared/main.cshtml";
+}
+
+@section BreadCrumb
+    {
+    <div class="page-area">
+        <div class="breadcumb-overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="breadcrumb text-center">
+                        <div class="section-headline white-headline text-center">
+                            <h3>Registration</h3>
+                        </div>
+                        <ul>
+                            <li class="home-bread">Home</li>
+                            <li>Registration</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<div class="contact-quote-area  fix" data-stellar-background-ratio="0.6">
+    <div class="container-full">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="company-faq">
+                    <div class="sub-headline">
+                        <h4>Important <span class="color">FAQ</span></h4>
+                    </div>
+                    <div class="faq-full">
+                        <div class="faq-details">
+                            <div class="panel-group" id="accordion">
+                                <!-- Panel Default -->
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="check-title">
+                                            <a data-toggle="collapse" class="active" data-parent="#accordion" href="#check1">
+                                                <span class="acc-icons"></span>Redug Lefes dolor sit amet.
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="check1" class="panel-collapse collapse in">
+                                        <div class="panel-body">
+                                            <p>
+                                                When replacing a multi-lined selection of text, the generated dummy text maintains the amount of lines. When replacing a selection of text within a single line, the amount of words is roughly being maintained.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- End Panel Default -->
+                                <!-- Panel Default -->
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="check-title">
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#check2">
+                                                <span class="acc-icons"></span> Laboriosam maiores alias accusamus
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="check2" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <p>
+                                                When replacing a multi-lined selection of text, the generated dummy text maintains the amount of lines. When replacing a selection of text within a single line, the amount of words is roughly being maintained.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- End Panel Default -->
+                                <!-- Panel Default -->
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="check-title">
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#check3">
+                                                <span class="acc-icons"></span>Mollitia dolore magnam quidem repellat
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="check3" class="panel-collapse collapse ">
+                                        <div class="panel-body">
+                                            <p>
+                                                When replacing a multi-lined selection of text, the generated dummy text maintains the amount of lines. When replacing a selection of text within a single line, the amount of words is roughly being maintained.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- End Panel Default -->
+                                <!-- Panel Default -->
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="check-title">
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#check4">
+                                                <span class="acc-icons"></span>Quas mollitia dolore magnam
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="check4" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <p>
+                                                When replacing a multi-lined selection of text, the generated dummy text maintains the amount of lines. When replacing a selection of text within a single line, the amount of words is roughly being maintained.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- End Panel Default -->
+                                <!-- Panel Default -->
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="check-title">
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#check5">
+                                                <span class="acc-icons"></span>The amount of words
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="check5" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <p>
+                                                When replacing a multi-lined selection of text, the generated dummy text maintains the amount of lines. When replacing a selection of text within a single line, the amount of words is roughly being maintained.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- End Panel Default -->
+                            </div>
+                        </div>
+                        <!-- End FAQ -->
+                    </div>
+                </div>
+            </div>
+            <!-- End Column -->
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="quote-details">
+                    <div class="sub-headline">
+                        <h4>Create a  <span class="color">Account</span></h4>
+                    </div>
+                    <div class="quote-main">
+                        <div class="row">
+                            @using (Html.BeginForm("Registration","Home"))
+                            {
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    <div class="col-md-12 col-sm-12 col-xs-12" id="contactForm">
+
+                                        
+                                        @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control",@placeholder="First Name" } })
+                                        @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                                        <div class="help-block with-errors"></div>
+                                        @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Last Name" } })
+                                        @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                                        <div class="help-block with-errors"></div>
+                                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "Email" } })
+                                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                        <div class="help-block with-errors last-part"></div>
+                                        @Html.EditorFor(model => model.Contact, new { htmlAttributes = new { @class = "form-control", @placeholder = "Phone" } })
+                                        @Html.ValidationMessageFor(model => model.Contact, "", new { @class = "text-danger" })
+                                        <div class="help-block with-errors last-part"></div>
+                                        @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control", @placeholder = "User Name" } })
+                                        @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                                        <div class="help-block with-errors last-part"></div>
+                                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", @placeholder = "Password" } })
+                                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <div class="help-block with-errors"></div>
+                                        <input type="submit" value="Submit" class="quote-btn" />
+                                        
+                                        <div id="msgSubmit" class="h3 text-center hidden"></div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                              
+                            }
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Column -->
+        </div>
+    </div>
+</div>
+

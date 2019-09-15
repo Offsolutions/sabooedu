@@ -1,0 +1,59 @@
+﻿@model IEnumerable<sabooedu.Areas.Auth.Models.FullCourse>
+@{
+    ViewBag.Title = "AllChapters";
+    Layout = "~/Views/Shared/main.cshtml";
+}
+
+<div class="page-area">
+    <div class="breadcumb-overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="breadcrumb text-center">
+                    <div class="section-headline white-headline text-center">
+                        <h3>Chapters</h3>
+                    </div>
+                    <ul>
+                        <li class="home-bread">Home</li>
+                        <li>Chapters</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="Services-area area-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="section-headline text-center">
+                    <h3>Chapters</h3>
+               
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="services-all">
+                @foreach (var cc in Model)
+                {<div class="col-md-4 col-sm-6 col-xs-12">
+                    <div class="single-services text-center">
+                        <div class="services-img">
+                            <img src="~/Uploadimage/@cc.Cover" alt="">
+
+                        </div>
+                        <div class="main-services">
+                            <div class="service-content">
+                                <h4>@cc.Name</h4><br />
+                                <a class="service-btn" href="@Url.Action("ChapterDetails","Chapters",new { id=cc.Cid})">read more</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,58 @@
+﻿@model IEnumerable<sabooedu.Areas.Auth.Models.Assign>
+@using sabooedu.Models
+@using sabooedu.Areas.Auth.Models
+@{
+    ViewBag.Title = "Courses";
+    Layout = "~/Views/Shared/Profile.cshtml";
+    dbcontext db = new dbcontext();
+}
+@section BreadCrumb
+    {
+<div class="page-area">
+    <div class="breadcumb-overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="breadcrumb text-center">
+                    <div class="section-headline white-headline text-center">
+                        <h3>Our Courses</h3>
+                    </div>
+                    <ul>
+                        <li class="home-bread">Home</li>
+                        <li>Courses</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    }
+<div class="Services-area">
+    <div class="container">
+     
+        <div class="row">
+            <div class="services-all">
+                @foreach (var cc in Model)
+                {
+                    FullCourse fc = db.FullCourses.Find(cc.Cid);
+                    <div class="col-md-4 col-sm-6 col-xs-12">
+                    <div class="single-services text-center">
+                        <div class="services-img">
+                            <img src="~/Uploadimage/@fc.Cover" alt="">
+
+                        </div>
+                        <div class="main-services">
+                            <div class="service-content">
+                                <h4>@fc.Name</h4><br />
+                                <a class="service-btn" href="@Url.Action("CoursesDetails","Profile",new { id=fc.Cid})">read more</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                }
+
+            </div>
+        </div>
+    </div>
+</div>

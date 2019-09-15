@@ -1,0 +1,52 @@
+﻿@model IEnumerable<sabooedu.Areas.Auth.Models.VideoLecture>
+@{
+    ViewBag.Title = "VideoLecture";
+    Layout = "~/Views/Shared/main.cshtml";
+}
+
+@section meta
+{
+    <meta name="description" content="#">
+    <meta name="keywords" content="#">
+}
+<div class="page-area">
+    <div class="breadcumb-overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="breadcrumb text-center">
+                    <div class="section-headline white-headline text-center">
+                        <h3>Video Lectures</h3>
+                    </div>
+                    <ul>
+                        <li class="home-bread">Coaching</li>
+                        <li>Video Lectures</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="video-area bg-color area-padding">
+    <div class="container">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-md-4 col-sm-4 col-xs-6">
+                <div class="video-inner text-center" style="background-image:url('../../Uploadimage/@item.Image')">
+                    <div class="video-content">
+                        <a href="@item.Url" class="video-play vid-zone">
+                            <i class="fa fa-play"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            }
+            
+            
+        </div>
+        <!-- end Row -->
+    </div>
+</div>

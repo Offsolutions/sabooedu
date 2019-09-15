@@ -1,0 +1,64 @@
+﻿@model IEnumerable<sabooedu.Areas.Auth.Models.Coaching>
+@{
+    ViewBag.Title = "Lecture";
+    Layout = "~/Views/Shared/main.cshtml";
+}
+
+@section meta
+{
+    <meta name="description" content="#">
+    <meta name="keywords" content="#">
+}
+<div class="page-area">
+    <div class="breadcumb-overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="breadcrumb text-center">
+                    <div class="section-headline white-headline text-center">
+                        <h3>Our Coaching</h3>
+                    </div>
+                    <ul>
+                        <li class="home-bread">Coaching</li>
+                        <li>Our Coaching</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="Services-area area-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="section-headline text-center">
+                    <h3>Our Coaching Classes</h3>
+                    <p>The world's Latest blockchain-powered online business platform with token investment &amp; grow your business.</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="services-all">
+                @foreach (var cc in Model)
+                {<div class="col-md-4 col-sm-6 col-xs-12">
+                    <div class="single-services text-center">
+                        <div class="services-img">
+                            <img src="~/Uploadimage/@cc.Image" alt="">
+                            
+                        </div>
+                        <div class="main-services">
+                            <div class="service-content">
+                                <h4>@cc.Name</h4>
+                                @Html.Raw(cc.ShortDescription)
+                                <a class="service-btn" href="@Url.Action("Coaching","Coaching",new { id=cc.Cid})">read more</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                }
+             
+            </div>
+        </div>
+    </div>
+</div>

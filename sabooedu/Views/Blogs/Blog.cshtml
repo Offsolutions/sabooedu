@@ -1,0 +1,62 @@
+﻿@model IEnumerable<sabooedu.Areas.Auth.Models.TheBlog>
+@{
+    ViewBag.Title = "Blog";
+    Layout = "~/Views/Shared/main.cshtml";
+}
+
+<div class="page-area">
+    <div class="breadcumb-overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="breadcrumb text-center">
+                    <div class="section-headline white-headline text-center">
+                        <h3>Blog</h3>
+                    </div>
+                    <ul>
+                        <li class="home-bread">Home</li>
+                        <li>Blog</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="blog-area area-padding">
+    <div class="container">
+        <div class="row">
+            
+            <div class="blog-grid home-blog">
+                @foreach (var item in Model)
+                {
+                    <div class="col-md-4 col-sm-6 col-xs-12">
+                        <div class="single-blog">
+                            <div class="blog-image">
+                                <a class="image-scale" href="#">
+                                    <img src="~/Uploadimage/@item.Thumbnail" alt="">
+                                </a>
+                            </div>
+                            <div class="blog-content">
+                                <div class="blog-title">
+                                    
+                                    <a href="#">
+                                        <h4>@item.Title</h4>
+                                    </a>
+                                </div>
+                                <div class="blog-text">
+                                    <p>@Html.Raw(item.ShortDescription)</p>
+                                    <a class="blog-btn" href="@Url.Action("BlogDetails","Blog",new { id=item.lid})">Read more</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+                <!-- Start single blog -->
+                
+
+            </div>
+        </div>
+        <!-- End row -->
+    </div>
+</div>

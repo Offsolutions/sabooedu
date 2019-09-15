@@ -1,0 +1,35 @@
+﻿@model sabooedu.Areas.Auth.Models.DownloadNotes
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Auth/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>DownloadNotes</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Coachings.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Coachings.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Notes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Notes)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Did }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

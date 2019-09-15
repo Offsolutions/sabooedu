@@ -1,0 +1,97 @@
+﻿@model sabooedu.Models.Registration
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/main.cshtml";
+}
+
+
+@section BreadCrumb
+    {
+<div class="page-area">
+    <div class="breadcumb-overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="breadcrumb text-center">
+                    <div class="section-headline white-headline text-center">
+                        <h3>Registration</h3>
+                    </div>
+                    <ul>
+                        <li class="home-bread">Home</li>
+                        <li>Registration</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+}
+<div class="contact-quote-area fix" data-stellar-background-ratio="0.6" style="background-position: 50% -183.225px;">
+    <div class="container-full">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="quote-details">
+                    <div class="sub-headline">
+                        <h4><span class="color">Sign In  Account</span></h4>
+                    </div>
+                    <div class="quote-main">
+                        <div class="row">
+                            @using (Html.BeginForm("Login", "Home", new { returnUrl = Request.QueryString["ReturnUrl"] }, FormMethod.Post))
+                            {
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <div class="col-md-12 col-sm-12 col-xs-12" id="contactForm">
+
+
+                                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "Email" } })
+                                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                    <div class="help-block with-errors"></div>
+                                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", @placeholder = "Password" } })
+                                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                                    
+                                </div>
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <div class="help-block with-errors">
+                                        <a href="@Url.Action("ForgetPassword","Home")" style="color:#c10823">Forget Password</a>
+                                    </div>
+                                    
+
+                                    <div id="msgSubmit" class="h3 text-center hidden"></div>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <div class="help-block with-errors"></div>
+                                    <input type="submit" value="Submit" class="quote-btn" />
+
+                                    <div id="msgSubmit" class="h3 text-center hidden"></div>
+                                    <div class="clearfix"></div>
+                                </div>
+
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="company-faq">
+                    <div class="sub-headline">
+                        <h4>How We <span class="color">Work</span></h4>
+                    </div>
+                    <div class="faq-full">
+                        <div class="video-inner text-center">
+                            <div class="video-content">
+                                <a href="https://www.youtube.com/watch?v=O33uuBh6nXA" class="video-play vid-zone">
+                                    <i class="fa fa-play"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Column -->
+            
+            <!-- End Column -->
+        </div>
+    </div>
+</div>
+

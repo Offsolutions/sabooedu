@@ -1,0 +1,413 @@
+﻿@using sabooedu.Models
+@using sabooedu.Areas.Auth.Models
+@{
+    Layout = null;
+    dbcontext db = new dbcontext();
+    Setting set = db.Settings.FirstOrDefault();
+    IEnumerable<SocialMedia> social = db.SocialMedias.ToList();
+    IEnumerable<Coaching> Coaching = db.Coachings.ToList();
+    IEnumerable<BlogCategory> Category = db.BlogCategories.ToList();
+
+    Pages page = db.Pages.FirstOrDefault(x => x.Pid == 5);
+}
+<!DOCTYPE html>
+
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Saboo's Education Point</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="img/logo/favicon.ico">
+    <!-- all css here -->
+    <!-- bootstrap v3.3.6 css -->
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/alertify/alertify.default.css" rel="stylesheet" />
+</head>
+<body>
+    <!--[if lt IE 8]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <div id="preloader"></div>
+    <header class="header-one">
+        <!-- Start top bar -->
+        <div class="topbar-area hidden-xs">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-sm-9">
+                        <div class="topbar-left">
+                            <ul>
+                                <li><a href="#"><i class="fa fa-map-marker"></i> @set.Address</a></li>
+                                <li class="hidden-sm"><a href="#"><i class="fa fa-clock-o"></i> @set.Contact</a></li>
+
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-3" style="text-align:right">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            var name = (User.Identity.IsAuthenticated ? HttpContext.Current.User.Identity.Name : "Guest");
+                            int val = Convert.ToInt32(name);
+                            Registration rr = db.Registrations.FirstOrDefault(x => x.Rid == val);
+                            <div class="btn-group" style="text-align:left">
+                                <button type="button" class="profile dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    @rr.FirstName <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" style="z-index: 10000;width:300px">
+                                    <li><a href="#">Profile</a></li>
+                                    <li><a href="@Url.Action("ChangePassword","Profile")">Change Password</a></li>
+                                    <li><a href="@Url.Action("SignOut","Home")">Sign Out</a></li>
+                                    
+                                </ul>
+                            </div>
+
+
+                        }
+                        else
+                        {
+                            <div class="quote-button">
+                                <a href="@Url.Action("Login","Home")" class="quote-btn" title="Quick view">Login</a>
+                                <a href="@Url.Action("Registration","Home")" class="quote-btn" title="Quick view">Registration</a>
+                            </div>
+                        }
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End top bar -->
+        <!-- header-area start -->
+        <div id="sticker" class="header-area hidden-xs">
+            <div class="container">
+                <div class="row">
+                    <!-- logo start -->
+                    <div class="col-md-3 col-sm-3 logo-bg">
+                        <div class="logo">
+                            <!-- Brand -->
+                            <a class="navbar-brand page-scroll sticky-logo" href="@Url.Action("Home","Home")">
+                                <img src="~/Uploadimage/@set.Logo" alt="">
+                            </a>
+                        </div>
+                    </div>
+                    <!-- logo end -->
+                    <div class="col-md-9 col-sm-9">
+                        <div class="header-right-link">
+                            <!-- search option start -->
+                            <form action="#">
+                                <div class="search-option">
+                                    <input type="text" placeholder="Search...">
+                                    <button class="button" type="submit"><i class="fa fa-search"></i></button>
+                                </div>
+                                <a class="main-search" href="#"><i class="fa fa-search"></i></a>
+                            </form>
+                            <!-- search option end -->
+                        </div>
+                        <!-- mainmenu start -->
+                        <nav class="navbar navbar-default">
+                            <div class="collapse navbar-collapse" id="navbar-example">
+                                <div class="main-menu">
+                                    <ul class="nav navbar-nav navbar-right">
+                                        <li>
+                                            <a href="@Url.Action("Home","Home")">Home</a>
+
+                                        </li>
+                                        <li>
+                                            <a class="pagess" href="#">About us</a>
+                                            <ul class="sub-menu">
+                                                <li><a href="@Url.Action("AboutUs","About")">About Us</a></li>
+                                                <li><a href="@Url.Action("OurVision","About")">Our Vision</a></li>
+                                                <li><a href="@Url.Action("WhyUs","About")">Why Choose Us</a></li>
+
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a class="pagess" href="@Url.Action("Lecture","Coaching")">Coaching</a>
+                                            <ul class="sub-menu">
+                                                @foreach (var item in Coaching)
+                                                {
+                                                    <li><a href="@Url.Action("Coaching","Coaching",new { id=item.Cid})">@item.Name</a></li>
+                                                }
+
+
+                                            </ul>
+                                        </li>
+                                        <li><a href="@Url.Action("AllChapters","Chapters")">Chapters</a></li>
+                                        <li>
+                                            <a class="pagess" href="@Url.Action("Blog","Blogs")">Blog</a>
+                                            <ul class="sub-menu">
+                                                @foreach (var item in Category)
+                                                {
+                                                    <li><a href="@Url.Action("BlogCategory","Blog", new { id=item.Bid})">@item.Name</a></li>
+                                                }
+
+
+                                            </ul>
+                                        </li>
+                                        <li><a href="@Url.Action("ContactUs","Home")">Contacts</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </nav>
+                        <!-- mainmenu end -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- header-area end -->
+        <!-- mobile-menu-area start -->
+        <div class="mobile-menu-area hidden-lg hidden-md hidden-sm">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="mobile-menu">
+                            <div class="logo">
+                                <a href="index.html"><img src="img/logo/logo.png" alt="" /></a>
+                            </div>
+                            <nav id="dropdown">
+                                <ul>
+                                    <li>
+                                        <a href="@Url.Action("Home","Home")">Home</a>
+
+                                    </li>
+                                    <li>
+                                        <a class="pagess" href="#">About us</a>
+                                        <ul class="sub-menu">
+                                            <li><a href="@Url.Action("AboutUs","About")">About us</a></li>
+                                            <li><a href="@Url.Action("WhyUs","About")">Why Choose Us</a></li>
+                                            <li><a href="@Url.Action("OurVision","About")">Our Vision</a></li>
+
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a class="pagess" href="@Url.Action("Lecture","Coaching")">Coaching</a>
+                                        <ul class="sub-menu">
+                                            @foreach (var coach in Coaching)
+                                            {
+                                                <li><a href="@Url.Action("Coaching","Coaching",new { id= coach.Cid})">@coach.Name</a></li>
+                                            }
+
+
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a class="pagess" href="#">Projects</a>
+                                        <ul class="sub-menu">
+                                            <li><a href="project-2.html">Project 2 Column</a></li>
+                                            <li><a href="project-3.html">Project 3 Column</a></li>
+                                            <li><a href="project-4.html">Project 4 Column</a></li>
+                                            <li><a href="single-project.html">Single Project</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a class="pagess" href="#">Blog</a>
+                                        <ul class="sub-menu">
+                                            <li><a href="blog.html">Blog grid</a></li>
+                                            <li><a href="blog-sidebar.html">Blog Sidebar</a></li>
+                                            <li><a href="blog-details.html">Blog Details</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="contact.html">contacts</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- mobile-menu-area end -->
+    </header>
+    <!-- header end -->
+    <!-- Start breadcumb Area -->
+    @RenderSection("BreadCrumb", required: false)
+    <!-- End breadcumb Area -->
+    <div class="single-services-page area-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-sm-4 col-xs-12">
+                    <div class="page-head-left">
+                        <!-- strat single area -->
+                        <div class="single-page-head">
+                            <div class="left-menu">
+                                <ul>
+                                    <li class="active"><a href="@Url.Action("Profiles","Profile")">Profile</a></li>
+                                    <li><a href="@Url.Action("Courses","Profile")">Courses</a></li>
+                                    
+                                </ul>
+                            </div>
+                        </div>
+                       
+                        <!-- strat single area -->
+                        <div class="single-page-head">
+                            <div class="support-text">
+                                <h4>Online Support</h4>
+                                <a><i class="icon icon-phone"></i>@set.Contact</a>
+                                <p>24 hours online support our customer.replacing a multi-lined selection of text.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End left sidebar -->
+                <!-- Start service page -->
+               
+                <div class="col-md-9 col-sm-8 col-xs-12">
+                    <div class="row">
+                        @RenderBody()
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+   
+    @*<div class="page-head area-padding">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="row">
+                            <div class="error-page">
+                                 map area
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <div class="error-main-text text-center">
+                                        <h2 class="error-easy-text">Page Not Found</h2>
+                                        <h1 class="high-text">4<span class="color">0</span>4</h1>
+                                        <h3 class="error-bot">Oops, the page you are looking for does not exit.</h3>
+                                        <a class="error-btn" href="#">Back Homepage</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+    <div class="clearfix"></div>
+    <!-- Start Footer bottom Area -->
+    <footer>
+        <div class="footer-area footer-area-2">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 col-sm-5 col-xs-12">
+                        <div class="footer-content">
+                            <div class="footer-head">
+                                <div class="footer-logo">
+                                    <a href="#"><img src="img/logo/logo.png" alt=""></a>
+                                </div>
+                                <p>
+                                    @Html.Raw(page.Description)
+                                </p>
+                                <div class="footer-icons">
+                                    <ul>
+                                        @foreach (var media in social)
+                                        {
+                                            <li>
+                                                <a href="@media.Url">
+                                                    <i class="@media.Icon"></i>
+                                                </a>
+                                            </li>
+                                        }
+
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end single footer -->
+                    <div class="col-md-3 col-sm-3 col-xs-12">
+                        <div class="footer-content">
+                            <div class="footer-head">
+                                <h4>Classes Link</h4>
+                                <div class="footer-services-link">
+                                    <ul>
+                                        @foreach (var item in Coaching)
+                                        {
+                                            <li><a href="@Url.Action("Coaching","Coaching",new {id=item.Cid })">@item.Name</a></li>
+                                        }
+
+
+                                    </ul>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-xs-12">
+                        <div class="footer-content">
+                            <div class="footer-head">
+                                <h4>Follow Us</h4>
+                                <div class="footer-services-link">
+                                    <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fofficialsolutions%2F&tabs&width=280&height=214&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId=755281824540788" width="280" height="214" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end single footer -->
+                    <div class="col-md-3 col-sm-4 col-xs-12">
+                        <div class="footer-content">
+                            <div class="footer-head">
+                                <h4>Subscribe</h4>
+                                <p>
+                                    Are you looking for professional advice for your new business.Are you looking for professional advice for your new business
+                                </p>
+                                <div class="subs-feilds">
+                                    <div class="suscribe-input">
+                                        <input type="email" class="email form-control width-80" id="sus_email" placeholder="Type Email">
+                                        <button type="submit" id="sus_submit" class="add-btn">Subscribe</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end single footer -->
+                </div>
+            </div>
+        </div>
+        <!-- End footer area -->
+        <div class="footer-area-bottom">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class="copyright">
+                            <p>
+                                Copyright © 2019
+                                <a href="#">Saboo Education Point</a> All Rights Reserved
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-12 text-right">
+                        <div class="copyright">
+                            <p>
+                                Powered By
+                                <a href="http://www.officialsolutions.in">Official Solutions</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="~/Scripts/alertify/alertify.min.js"></script>
+    <script>
+        $(function () {
+
+            var message = '@TempData["Success"]'
+            var danger = '@TempData["danger"]'
+            if (message != '') {
+                alertify.success(message);
+            }
+            if (danger != '') {
+                alertify.error(danger);
+            }
+        })
+    </script>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

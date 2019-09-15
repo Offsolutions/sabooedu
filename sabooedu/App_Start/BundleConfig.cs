@@ -20,12 +20,18 @@ namespace sabooedu
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js",
-                      "~/Scripts/respond.js"));
+                      "~/Scripts/jquery-1.12.4.min.js",
+                      "~/Scripts/bootstrap.min.js", "~/Scripts/owl.carousel.min.js", "~/Scripts/jquery.counterup.min.js",
+                      "~/Scripts/waypoints.js", "~/Scripts/isotope.pkgd.min.js", "~/Scripts/jquery.stellar.min.js",
+                      "~/Scripts/magnific.min.js", "~/Scripts/venobox.min.js", "~/Scripts/jquery.meanmenu.js",
+                      "~/Scripts/form-validator.min.js", "~/Scripts/plugins.js", "~/Scripts/main.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/owl.carousel.css", "~/Content/owl.transitions.css", "~/Content/meanmenu.min.css",
+                      "~/Content/font-awesome.min.css", "~/Content/icon.css", "~/Content/flaticon.css",
+                      "~/Content/magnific.min.css", "~/Content/venobox.css", "~/Content/style.css",
+                      "~/Content/responsive.css"));
         }
     }
 }

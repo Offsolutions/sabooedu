@@ -1,0 +1,66 @@
+﻿@model IEnumerable<sabooedu.Areas.Auth.Models.AllModule>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Auth/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create","",new{ @class="btn btn-space btn-primary"})
+</p>
+<table class="table table-striped table-hover table-fw-widget" id="table3">
+ <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Cid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Chid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Video)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.File)
+        </th>
+        <th></th>
+    </tr>
+	 </thead>
+	 <tbody>
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cid)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Chid)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Video)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.File)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Mid },new {@class= " badge badge-primary" }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Mid },new {@class= " badge badge-warning" }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Mid },new {@class= " badge badge-danger" })
+        </td>
+    </tr>
+}
+</tbody>
+</table>

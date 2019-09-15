@@ -1,0 +1,52 @@
+﻿@model sabooedu.Areas.Auth.Models.Pages
+@{
+    ViewBag.Title = "OurVision";
+    Layout = "~/Views/Shared/main.cshtml";
+}
+
+@section meta
+{
+    <meta name="description" content="@Model.MetaDescription">
+    <meta name="keywords" content="@Model.Keyword">
+}
+<div class="page-area">
+    <div class="breadcumb-overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="breadcrumb text-center">
+                    <div class="section-headline white-headline text-center">
+                        <h3>Our Vision</h3>
+                    </div>
+                    <ul>
+                        <li class="home-bread">About Us</li>
+                        <li>Our Vision</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="video-page-area area-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="video-text">
+                   @Html.Raw(Model.Description)
+                </div>
+            </div>
+            @*<div class="col-md-6 col-sm-6 col-xs-12">
+                    <div class="video-inner text-center">
+                        <div class="video-content">
+                            <a href="https://www.youtube.com/watch?v=O33uuBh6nXA" class="video-play vid-zone">
+                                <i class="fa fa-play"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>*@
+        </div>
+        <!-- end Row -->
+    </div>
+</div>
+
+

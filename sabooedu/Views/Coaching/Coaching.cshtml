@@ -1,0 +1,101 @@
+﻿@model sabooedu.Areas.Auth.Models.Coaching
+@using sabooedu.Areas.Auth.Models
+@using sabooedu.Models
+@{
+    ViewBag.Title = "Coaching";
+    Layout = "~/Views/Shared/main.cshtml";
+    dbcontext db = new dbcontext();
+    IEnumerable<Coaching> coaching = db.Coachings.ToList();
+    int id = Model.Cid;
+}
+
+@section meta
+{
+    <meta name="description" content="@Model.MetaDescription">
+    <meta name="keywords" content="@Model.Keyword">
+}
+<div class="page-area">
+    <div class="breadcumb-overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="breadcrumb text-center">
+                    <div class="section-headline white-headline text-center">
+                        <h3>@Model.Name</h3>
+                        
+                    </div>
+                    <ul>
+                        <li class="home-bread">Coaching</li>
+                        <li>@Model.Name</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="single-services-page area-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 col-sm-4 col-xs-12">
+                <div class="page-head-left">
+                    <!-- strat single area -->
+                    <div class="single-page-head">
+                        <div class="left-menu">
+                            <ul>
+                                @foreach (var item in coaching)
+                                {
+                                    
+                                    <li><a href="@Url.Action("Coaching","Coaching",new { id=item.Cid})">@item.Name </a></li>
+                                }
+                                
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="single-page-head">
+                        <div class="download-btn">
+                            <h4>Download</h4>
+                            <div class="about-btn">
+                                <a href="@Url.Action("VideoLecture","Coaching",new { id=id})" class="down-btn"><i class="fa fa-file-pdf-o"></i>Video Lecture</a>
+                                <a href="#" class="down-btn"><i class="fa fa-file-word-o"></i>Notes</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- strat single area -->
+                    <div class="single-page-head">
+                        <div class="support-text">
+                            <h4>Online Support</h4>
+                            <a><i class="icon icon-phone"></i>+1313-5454652</a>
+                            <p>24 hours online support our customer.replacing a multi-lined selection of text.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End left sidebar -->
+            <!-- Start service page -->
+            <div class="col-md-9 col-sm-8 col-xs-12">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="single-page">
+                            <div class="page-img">
+                                <img src="~/Uploadimage/@Model.Image" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- strat single page -->
+                    <!-- single-well end-->
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="single-well">
+                            <a href="#">
+                                <h3>@Model.Name</h3>
+                            </a>
+                            <p>@Html.Raw(Model.Description)</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- end Row -->
+            </div>
+        </div>
+    </div>
+</div>
+

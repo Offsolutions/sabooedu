@@ -1,0 +1,42 @@
+﻿@model IEnumerable<sabooedu.Areas.Auth.Models.AllLesson>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Auth/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create","",new{ @class="btn btn-space btn-primary"})
+</p>
+<table class="table table-striped table-hover table-fw-widget" id="table3">
+ <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FullCourses.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th></th>
+    </tr>
+	 </thead>
+	 <tbody>
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.FullCourses.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Chid },new {@class= " badge badge-primary" }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Chid },new {@class= " badge badge-warning" }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Chid },new {@class= " badge badge-danger" })
+        </td>
+    </tr>
+}
+</tbody>
+</table>
